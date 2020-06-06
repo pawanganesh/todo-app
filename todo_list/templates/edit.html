@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<form method="POST" class="form-inline">
+    {% csrf_token %}
+    <input class="form-control mr-sm-2" type="search" name="item" placeholder="{{item.item}}" value="{{item.item}}" aria-label="Search">
+    <input type="hidden" value="{{item.completed}}" name="completed">
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">ADD ITEM</button>
+</form>
+{% endblock content %}

@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <table class="table table-bordered">
+        <thead class="font-weight-bold">
+            <tr>
+                <td>TASKS</td>
+                <td>STATUS</td>
+                <td>ACTION</td>
+            </tr>
+        </thead>
+        <tbody>
+            {% for task in tasks %}
+            {% if task.completed %}
+            <tr class="table-secondary">
+                <td class="striker">{{task.item}}</td>
+                <td><a href="{% url 'uncross' task.id %}">Uncross</a></td>
+                <td>
+                    <a href="{% url 'edit_task' task.id %}" class="btn btn-seconday px-0">
+                        <i class="far fa-edit fa-lg"></i>
+                    </a>
+                    <form action="{% url 'delete_task' task.id %}" class="d-inline">
+                        <button type="submit" class="btn">
+                            <i class="fas fa-trash fa-lg text-danger float-right"></i>
+                        </button>
+                    </form>
+                </td>
+            </tr>
+            {% else %}
+            <tr>
+                <td>{{task.item}}</td>
+                <td><a href="{% url 'cross_off' task.id %}">Cross off</a></td>
+                <td>
+                    <a href="{% url 'edit_task' task.id %}" class="btn btn-seconday px-0">
+                        <i class="far fa-edit fa-lg"></i>
+                    </a>
+                    <form action="{% url 'delete_task' task.id %}" class="d-inline">
+                        <button type="submit" class="btn">
+                            <i class="fas fa-trash fa-lg text-danger float-right"></i>
+                        </button>
+                    </form>
+                </td>
+            </tr>
+            {% endif %}
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock content %}
